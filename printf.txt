@@ -1,0 +1,40 @@
+PRINTF
+
+int     ft_printf(const char *,...) <-- need to handle mutltiple arguments ==> check stdargs and the man 3 stdargs.
+
+- printf outputs according to a format --> outpot to stdout
+- has to respect the flags : cspdiuxX%
+- has to handle any combination of flags '-0.*' and minimum field size
+- no buffer to handle
+- allowed functions = malloc, free, write, va_start, va_arg, va_copy, va_end
+- Makefile = all, clean, flcean, re, bonus
+- allowed files = *.C, */*.c, *.h, */*.h, Makefile
+
+BONUS
+
+- handle these conversions = nfge
+- handle these flags = 1 11 h hh
+- handle all the flags = `# +
+
+
+
+What are the argumetns and flags?
+
+diuxX = the int is conveted to a signed decimal (d and i), unsigned decimal (u), or unsigned hexadecimal(x and X).
+c = the int argument is converted to an unsigned char, and the resulting character is printed.
+
+p = the void * pointer argument is printed in hexadecimal ( by '%#x' or '%#lx')
+% =  if a % is written, no argument is converted. th complete conversion specification is "%%".
+
+s = the char * argument is expected to be a pointer to an array of character type (pointer to a string). 
+    char are printed until a NULL char is encountered (not included). 
+    if precised no more than the number of given char is written, 
+    if a precision is given, no null char in the printed string. 
+    if the size is bigger than the array, it must print a null char.
+
+
+
+stdargs
+
+A function may be called with a varying number of arguments of varying types. the strdarg.h declares a type va_list and defines 3 macros for stepping through a list of arguments whose number and types are not known to the callde function
+call the va_start() macro first and initialize ap that can be passed to va_arg() va_end() signals the there are no further arguments. 
