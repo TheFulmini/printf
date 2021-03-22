@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 14:58:30 by afulmini          #+#    #+#             */
-/*   Updated: 2020/08/23 16:20:45 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:59:52 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char *i;
+	unsigned char *i;
 
-	i = s;
-	while (n)
-	{
-		*i = 0;
-		i++;
-		n--;
-	}
+	i = (unsigned char *)s;
+	while (n--)
+		*(i++) = '\0';
 }

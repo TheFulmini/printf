@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 14:58:30 by afulmini          #+#    #+#             */
-/*   Updated: 2020/08/23 16:20:45 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:02:05 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void			*p;
-	size_t			total;
+	char	*call;
 
-	total = count * size;
-	if (!(p = malloc(total)))
+	if (!(call = malloc(size * count)))
 		return (NULL);
-	while (total-- > 0)
-		*(unsigned char *)p++ = 0;
-	return (p - count * size);
+	ft_bzero(call, count * size);
+	return (call);
 }

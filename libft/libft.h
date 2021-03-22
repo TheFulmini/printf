@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 19:49:06 by afulmini          #+#    #+#             */
-/*   Updated: 2020/12/17 17:49:33 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:08:19 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+# include <stdio.h>
 
 typedef struct	s_list
 {
@@ -56,21 +58,12 @@ void			ft_putstr(char *s);
 void			ft_putendl_fd(char *s, int fd);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_itoa(int n);
+char			*ft_itoa_uns(unsigned int n);
+char			*ft_itoa_pointers(unsigned long int nb, int base);
+char			*ft_itoa_hex(unsigned int nb, int base);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			**ft_split(char const *s, char c);
-t_list			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list **alst, t_list *new);
-int				ft_lstsize(t_list *lst);
-t_list			*ft_lstlast(t_list *lst);
-void			ft_lstadd_back(t_list **alst, t_list *new);
-void			ft_lstdelone(t_list *lst, void (*del)(void *));
-void			ft_lstclear(t_list **lst, void (*del)(void *));
-void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
-					void (*del)(void *));
-t_list			*ft_lstsplit(char const *s, char c);
 char			*ft_strstr(const char *str, const char *substr);
 char			*ft_strnew(size_t size);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
@@ -88,5 +81,17 @@ void			ft_strclr(char *s);
 char			*ft_strcat(char *dest, const char *src);
 void			ft_memdel(void **tab);
 void			*ft_memdup(const void *src, size_t size);
+char			**ft_split(char const *s, char c);
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_front(t_list **alst, t_list *new);
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+					void (*del)(void *));
+t_list			*ft_lstsplit(char const *s, char c);
 
 #endif

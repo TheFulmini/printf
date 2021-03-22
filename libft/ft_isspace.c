@@ -6,7 +6,7 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 22:10:26 by afulmini          #+#    #+#             */
-/*   Updated: 2020/12/17 10:00:01 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:11:57 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		ft_isspace(int c)
 {
-	if (c == '\t' || c == '\n' || c == '\r' ||
-			c == '\v' || c == '\f' || c == ' ')
+	c = (unsigned char)c;
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
 		return (1);
-	else
-		return (0);
+	return (0);
 }

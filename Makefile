@@ -5,57 +5,55 @@
 #                                                     +:+ +:+         +:+      #
 #    By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/12/15 13:19:38 by afulmini          #+#    #+#              #
-#    Updated: 2021/02/15 17:34:25 by afulmini         ###   ########.fr        #
+#    Created: 2021/03/19 12:02:21 by afulmini          #+#    #+#              #
+#    Updated: 2021/03/19 14:54:16 by afulmini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re
-
 NAME = libftprintf.a
-CC = gcc
-CC_FLAGS = -Wall -Wextra -Werror
-PATH_OPRINTF = ./src/
-PATH_SPRINTF = ./src/
-PATH_IPRINTF = ./src/
-PATH_OLIBFT = ./libft/
-PATH_SLIBFT = ./libft/
-PATH_ILIBFT = ./libft/
-FILESLIBFT = ft_strlen ft_putchar ft_putchar_fd ft_putstr ft_putstr_fd ft_putnchar ft_isdigit ft_strchr ft_isspace \
-			ft_atoi ft_putnbr ft_putnbr_fd ft_itoa ft_strdup ft_strnew ft_bzero ft_strcpy ft_memalloc
-FILESPRINTF = ft_printf ft_flags ft_conversion ft_commun ft_putc ft_puts ft_putdi ft_putx ft_putu ft_putp
 
-SLIBFT = $(addprefix $(PATH_SLIBFT), $(addsuffix .c, $(FILESLIBFT)))
-OLIBFT = $(addprefix $(PATH_OLIBFT), $(addsuffix .o, $(FILESLIBFT:.c=.o)))
-ILIBFT = $(addprefix $(PATH_ILIBFT), libft.h)
-SPRINTF = $(addprefix $(PATH_SPRINTF), $(addsuffix .c, $(FILESPRINTF)))
-OPRINTF = $(addprefix $(PATH_OPRINTF), $(addsuffix .o, $(FILESPRINTF:.c=.o)))
-IPRINTF = $(addprefix $(PATH_IPRINTF), ft_printf.h)
+LIBFT_DIR = libft
 
-all : $(NAME)
+LIBFT = $(LIBFT_DIR)/libft.a
 
-$(NAME) : $(OLIBFT) $(OPRINTF)
-	@ar rcs $(NAME) $(OPRINTF) $(OLIBFT)
-	@echo "\033[0mCreating your function ...  \033[32mok\033[0m"
+HEADER = -I. -I./$(LIBFT_DIR)
 
-$(PATH_OLIBFT)%.o : $(PATH_SLIBFT)%.c $(ILIBFT)
-	@$(CC) $(CC_FLAGS) -o $@ -c $< -I $(PATH_ILIBFT)
+SRCS = ./srcs/ft_printf.c ./srcs/ft_print_c.c ./srcs/ft_print_di.c \
+		./srcs/ft_print_p.c ./srcs/ft_print_s.c ./srcs/ft_print_u.c ./srcs/ft_print_percent.c \
+		./srcs/ft_print_bigx.c ./srcs/ft_print_smallx.c ./srcs/ft_parameters.c \
 
-$(PATH_OPRINTF)%.o : $(PATH_SPRINTF)%.c $(IPRINTF)
-	@$(CC) $(CC_FLAGS) -o $@ -c $< -I $(PATH_IPRINTF)
+OBJS = $(SRCS:.c=.o)
 
-clean:	
-			@rm -f $(OLIBFT) $(OPRINTF)
-			@echo "\n\033[32m"
-			@echo " ██████ ██      ███████  █████  ███    ██"
-			@echo "██      ██      ██      ██   ██ ████   ██"
-			@echo "██      ██      █████   ███████ ██ ██  ██"
-			@echo "██      ██      ██      ██   ██ ██  ██ ██"
-			@echo " ██████ ███████ ███████ ██   ██ ██   ████"
-			@echo "\033[0m\nRemoving files *.o  ... \033[32mok\033[0m"
+CC	= gcc
 
-fclean:		clean
-			@rm -f ${NAME}
-			@echo "\033[0mRemoving "${NAME}" ... \033[32mok\033[0m"
-			
-re:		fclean	all
+CFLAGS = -Wall -Werror -Wextra
+
+RM 	= rm -rf
+
+AR = ar rcs
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	@echo "Making your printf library ... \033[32mok\033[0m\n"
+	@make -C $(LIBFT_DIR)
+	@cp $(LIBFT) $(NAME)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "\n\033[32m || DONE | \033[0m\n"
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+
+clean:
+	@$(RM) $(OBJS)
+	@make clean -C $(LIBFT_DIR)
+	@echo "Cleaning your .o objetcs ... \033[32mok\033[0m\n"
+
+fclean:	clean
+	@$(RM) $(NAME)
+	@make fclean -C $(LIBFT_DIR)
+	@echo "Removing your library ... \033[32mok\033[0m\n"
+
+re:	fclean all
+
+.PHONY: all clean fclean re

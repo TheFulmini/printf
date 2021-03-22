@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_itoa_uns.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/23 14:58:30 by afulmini          #+#    #+#             */
-/*   Updated: 2021/03/16 10:50:54 by afulmini         ###   ########.fr       */
+/*   Created: 2021/03/19 11:06:27 by afulmini          #+#    #+#             */
+/*   Updated: 2021/03/19 11:06:33 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static int	ft_lg_uns(unsigned int n)
 {
-	char			*result;
-	unsigned int	i;
-	unsigned int	j;
+	int	len;
 
-	if (!s1 || !s2)
+	if (n == 0)
+		return (len = 1);
+	len = 0;
+	while (n > 0)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+char		*ft_itoa_uns(unsigned int n)
+{
+	char	*str;
+	size_t	i;
+
+	i = ft_lg_uns(n);
+	if (!(str = malloc(sizeof(char) * i + 1)))
 		return (NULL);
-	if (!(result = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1)
-	* sizeof(char))))
-		return (0);
-	i = 0;
-	while (s1[i])
+	str[i] = '\0';
+	i--;
+	if (n == 0)
+		str[0] = '0';
+	while (n > 0)
 	{
-		result[i] = s1[i];
-		i++;
+		str[i] = (n % 10) + 48;
+		n = n / 10;
+		i--;
 	}
-	j = 0;
-	while (s2[j])
-	{
-		result[i] = s2[j];
-		i++;
-		j++;
-	}
-	result[i] = '\0';
-	return (result);
+	return (str);
 }

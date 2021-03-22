@@ -9,15 +9,18 @@ SRC = ft_atoi.c \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
-		ft_isspace \
+		ft_isspace.c \
 		ft_itoa.c \
+		ft_itoa_uns.c \
+		ft_itoa_pointers.c \
+		ft_itoa_hex.c \
+		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memchr.c \
 		ft_memcmp.c \
 		ft_memcpy.c \
-		ft_memdem.c \
+		ft_memdel.c \
 		ft_memdup.c \
-		ft_memalloc \
 		ft_memmove.c \
 		ft_memset.c \
 		ft_putchar_fd.c \
@@ -38,6 +41,7 @@ SRC = ft_atoi.c \
 		ft_strdup.c \
 		ft_strequ.c \
 		ft_striter.c \
+		ft_striteri.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
@@ -56,7 +60,7 @@ SRC = ft_atoi.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c 
+		ft_toupper.c \
 		ft_lstadd_back.c \
 		ft_lstadd_front.c \
 		ft_lstclear.c \
@@ -102,6 +106,7 @@ clean:
 fclean:
 	@echo "Removing lib"
 	@$(RM) $(NAME) $(OBJ)
+	@echo "Removing files *.o  ... \033[32mok\033[0m"
 
 
 re: fclean all

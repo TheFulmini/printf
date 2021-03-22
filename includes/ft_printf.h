@@ -6,37 +6,40 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 17:31:19 by afulmini          #+#    #+#             */
-/*   Updated: 2020/12/17 17:43:43 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 12:28:26 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include "../libft/libft.h"
 # include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-typedef struct  s_arg
+typedef struct	s_arg
 {
-    int         zero;
-    int         width;
-    int         precision;
-    int         left;
-    
-}               t_arg;
+	int	minus;
+	int	zero;
+	int	zero_per;
+	int	width;
+	int	dot;
+	int	precision;
+	int	negative;
+	int	ret;
+}				t_arg;
 
-int             ft_printf(const char *format, ...);
-int             ft_set_flags(t_arg *flags, const char *format, va_list param);
-int             ft_print_arg(const char *format, t_arg *flags, va_list param);
-int             ft_len_nbr_base(long nbr, char *base);
-int             ft_print_nbr_base(long nbr, char *base);
-int             ft_putc(t_arg *flags, va_list param, char c);
-int             ft_puts(t_arg *flags, va_list param);
-int             ft_putdi(t_arg *flags, va_list param);
-int             ft_putx(t_arg *flags, va_list param, char *base);
-int             ft_putu(t_arg *flags, va_list param);
-int             ft_putp(t_arg *flags, va_list param);
+int				ft_printf(const char *format, ...);
+void			ft_verif_flags(const char *format, va_list param, t_arg *flags,
+						int *count);
+void			ft_print_c(va_list param, t_arg *flags);
+void			ft_print_s(va_list param, t_arg *flags);
+void			ft_print_di(va_list param, t_arg *flags);
+void			ft_print_u(va_list param, t_arg *flags);
+void			ft_print_p(va_list param, t_arg *flags);
+void			ft_print_bigx(va_list param, t_arg *flags);
+void			ft_print_smallx(va_list param, t_arg *flags);
+void			ft_print_percent(t_arg *flags);
 
 #endif

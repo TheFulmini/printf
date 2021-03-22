@@ -6,19 +6,22 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 14:58:30 by afulmini          #+#    #+#             */
-/*   Updated: 2020/12/15 22:12:26 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:59:00 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
-	int				sign;
-	unsigned int	nb;
+	long int	res;
+	long int	sign;
 
+	res = 0;
 	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
+	while (*str == '\t' || *str == '\n' || *str == '\v' ||
+				*str == '\f' || *str == '\r' || *str == ' ')
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -26,11 +29,14 @@ int	ft_atoi(const char *str)
 			sign *= -1;
 		str++;
 	}
-	nb = 0;
-	while (*str >= 48 && *str <= 57)
+	while (*str >= '0' && *str <= '9')
 	{
-		nb = (nb * 10) + *str - 48;
+		res = (res * 10) + (*str - 48);
+		if (res * sign > INT_MAX)
+			return (-1);
+		if (res * sign < INT_MIN)
+			return (0);
 		str++;
 	}
-	return ((int)(nb * sign));
+	return (res * sign);
 }

@@ -6,56 +6,56 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 14:58:30 by afulmini          #+#    #+#             */
-/*   Updated: 2020/08/23 16:20:45 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:05:04 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static	int		sized(int n)
+static int	ft_lg_num(int n)
 {
-	int	result;
+	int len;
 
-	if (n == -2147483648)
-		return (11);
-	result = 1;
+	if (n == 0)
+		return (len = 1);
+	len = 0;
 	if (n < 0)
 	{
-		result++;
 		n *= -1;
+		len++;
 	}
-	while (n > 9)
+	while (n > 0)
 	{
 		n /= 10;
-		result++;
+		len++;
 	}
-	return (result);
+	return (len);
 }
 
-char			*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
-	char			*result;
-	int				i;
-	unsigned int	nbr;
+	char	*str;
+	size_t	i;
 
-	i = sized(n);
-	if (!(result = (char*)malloc(sizeof(char) * (i + 1))))
+	if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
+	i = ft_lg_num(n);
+	if (!(str = malloc(sizeof(char) * i + 1)))
 		return (NULL);
-	result[i--] = '\0';
+	str[i] = '\0';
+	i--;
 	if (n == 0)
-		result[0] = '0';
-	if (n < 0)
+		str[0] = '0';
+	else if (n < 0)
 	{
-		nbr = -1 * n;
-		result[0] = '-';
+		str[0] = '-';
+		n *= -1;
 	}
-	else
-		nbr = n;
-	while (nbr > 0)
+	while (n > 0)
 	{
-		result[i--] = nbr % 10 + 48;
-		nbr /= 10;
+		str[i] = (n % 10) + 48;
+		n /= 10;
+		i--;
 	}
-	return (result);
+	return (str);
 }

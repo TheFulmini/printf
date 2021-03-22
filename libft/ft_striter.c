@@ -6,13 +6,13 @@
 /*   By: afulmini <afulmini@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 18:37:06 by afulmini          #+#    #+#             */
-/*   Updated: 2020/12/16 18:38:51 by afulmini         ###   ########.fr       */
+/*   Updated: 2021/01/18 14:32:01 by afulmini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striter(char *s, void (*f) (char *))
+void	ft_striter(char *s, void (*f)(char *))
 {
 	if (s && f)
 		while (*s)
